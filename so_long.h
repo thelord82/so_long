@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 13:45:49 by malord            #+#    #+#             */
-/*   Updated: 2022/06/20 13:48:10 by malord           ###   ########.fr       */
+/*   Updated: 2022/06/21 10:02:53 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ typedef struct s_vars {
 	int		moves;
 	int		x;
 	int		y;
+	char	**map;
 }				t_vars;
 #endif
