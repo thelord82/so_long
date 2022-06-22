@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 07:58:23 by malord            #+#    #+#             */
-/*   Updated: 2022/06/21 17:03:40 by malord           ###   ########.fr       */
+/*   Updated: 2022/06/22 09:15:38 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_check_error(char *argu, int argc)
 	return (1);
 }
 
-void	ft_check_map_error(char **map, int column)
+void	ft_check_wall_error(char **map, int column)
 {
 	int	i;
 	int	j;
@@ -40,7 +40,6 @@ void	ft_check_map_error(char **map, int column)
 	i = 0;
 	j = 1;
 	size = ft_strlen(map[0]);
-	printf("%d\n", size);
 	while (i < size - 1)
 	{
 		if (map[0][i] != '1' || map[column - 1][i] != '1')
@@ -49,30 +48,16 @@ void	ft_check_map_error(char **map, int column)
 			return ;
 		}
 		i++;
-		//printf("%s", map[j]);
-		/*if (map[j][0] != '1' || map[j][size - 2])
+	}
+	while (j < (column - 1))
+	{
+		if (map[j][0] != '1' || map[j][size - 2] != '1')
 		{
 			printf("Error\nMap is not circled by walls.\n");
 			return ;
 		}
-		j++;*/
+		j++;
 	}
-	/*while (i < size)
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			//if (map[0][j] != '1' || map[i][0] != 1 || map[i][ft_strlen(map[i] - 1)] != 1 || map[i][j] != 1)
-			if (map[0][j] != '1')
-			{
-				printf("Error\nMap is not surrounded by walls.\n");
-				return ;
-			}
-			//else if ()
-			j++;
-		}
-		i++;
-	}*/
 }
 
 int	ft_keys(int keycode, t_vars *vars)
@@ -142,7 +127,7 @@ int	main(int argc, char **argv)
 		}
 		column = j;
 		j = 0;
-		ft_check_map_error(&vars.map[j], column);
+		ft_check_wall_error(&vars.map[j], column);
 	}
 	/*t_vars	vars;
 	char	*floor_path = "/Users/malord/42/so_long/floorgreen.xpm";
