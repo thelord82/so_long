@@ -6,14 +6,67 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 07:58:23 by malord            #+#    #+#             */
-/*   Updated: 2022/06/22 09:15:38 by malord           ###   ########.fr       */
+/*   Updated: 2022/06/23 11:57:15 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "so_long.h"
 
-int	ft_check_error(char *argu, int argc)
+void	ft_check_map(char **map, int column)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < column - 1)
+	{
+		j = 0;
+		while (j < (int)ft_strlen(map[0]) - 1)
+		{
+			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'E'
+				&& map[i][j] != 'C' && map[i][j] != 'P' && map[i][j] != '\n')
+			{
+				printf("Error\nMap has invalid characters.");
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void	ft_check_rectangle(char **map, int column)
+{
+	int	i;
+
+	i = 0;
+	while (i < column - 1)
+	{
+		if ((i + 1) == (column - 1))
+		{
+			if (ft_strlen(map[i]) != ft_strlen(map[i + 1]) + 1)
+			{
+				printf("Error\nMap is pas rectangle.");
+				return ;
+			}
+		}
+		else if (ft_strlen(map[i]) != ft_strlen(map[i + 1]))
+		{
+			printf("Error\nMap is not rectangle.");
+			return ;
+		}
+		i++;
+	}
+	if (column == (int)ft_strlen(map[0]) - 1)
+	{
+		printf("Error\nMap is a square.");
+		return ;
+	}
+}
+
+int	ft_check_args(char *argu, int argc)
 {
 	int	ext;
 
@@ -31,7 +84,7 @@ int	ft_check_error(char *argu, int argc)
 	return (1);
 }
 
-void	ft_check_wall_error(char **map, int column)
+void	ft_check_wall(char **map, int column)
 {
 	int	i;
 	int	j;
@@ -108,7 +161,7 @@ int	main(int argc, char **argv)
 	int		column;
 
 	j = 0;
-	if (ft_check_error(argv[1], argc) == 1)
+	if (ft_check_args(argv[1], argc) == 1)
 	{
 		fd = open(argv[1], O_RDONLY);
 		vars.map = ft_calloc(sizeof(t_vars), 1);
@@ -127,7 +180,9 @@ int	main(int argc, char **argv)
 		}
 		column = j;
 		j = 0;
-		ft_check_wall_error(&vars.map[j], column);
+		ft_check_wall(&vars.map[j], column);
+		ft_check_rectangle(&vars.map[j], column);
+		ft_check_map(&vars.map[j], column);
 	}
 	/*t_vars	vars;
 	char	*floor_path = "/Users/malord/42/so_long/floorgreen.xpm";
