@@ -6,7 +6,7 @@
 #    By: malord <malord@student.42quebec.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/20 10:07:57 by malord            #+#    #+#              #
-#    Updated: 2022/06/21 13:15:30 by malord           ###   ########.fr        #
+#    Updated: 2022/06/27 13:15:30 by malord           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,30 +17,42 @@ CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra
 RM			=	rm -f
 
-SRCS		=	so_long.c
+SRCS		=	so_long.c	\
+				error_funcs.c
 
 OBJS		= 	${SRCS:.c=.o}
 
 # Targets
 
 .c.o:
-				$(CC) $(CFLAGS) -Imlx -c $< -o $(<:.c=.o)
+				@$(CC) $(CFLAGS) -Imlx -c $< -o $(<:.c=.o)
 
 $(NAME): 		$(OBJS)
-				$(MAKE) -C libft
-				$(CC) $(CFLAGS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(OBJS) $(LIBFT)	
+				@echo "Compiling libft..."
+				@$(MAKE) -C libft
+				@echo "libft compiled successfully."
+				@echo "Compiling $(NAME) sources"
+				@$(CC) $(CFLAGS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(OBJS) $(LIBFT)	
+				@echo "Done !"
 
 all: 			$(NAME)
 
 # Removes objects
 clean:
-				$(RM) $(OBJS)
-				make clean -C libft
+				@echo "Removing $(NAME) objects..."
+				@$(RM) $(OBJS)
+				@echo "Removing libft objects..."
+				@make clean -C libft
+				@echo "$(NAME) objects successfully deleted."
+				@echo "libft objects successfully deleted."
 
 # Removes objects and executable
 fclean: 		clean
-				$(RM) $(NAME)
-				$(RM) $(LIBFT)
+				@echo "Removing $(NAME) program..."
+				@$(RM) $(NAME)
+				@echo "Removing libft archive..."
+				@$(RM) $(LIBFT)
+				@echo "Executable(s) and archive(s) successfully deleted."
 
 # Removes objects and executable then remakes all
 re: 			fclean all
