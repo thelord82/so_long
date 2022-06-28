@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:38 by malord            #+#    #+#             */
-/*   Updated: 2022/06/27 13:15:44 by malord           ###   ########.fr       */
+/*   Updated: 2022/06/28 07:48:43 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,6 @@ void	ft_check_rectangle(t_vars *elem, size_t column)
 			exit(0);
 		}
 		i++;
-	}
-	if (column == ft_strlen(elem->map[0]) - 1)
-	{
-		printf("Error\nMap is a square and must be rectangle.");
-		exit(0);
 	}
 }
 

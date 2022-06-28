@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 13:45:49 by malord            #+#    #+#             */
-/*   Updated: 2022/06/27 13:15:34 by malord           ###   ########.fr       */
+/*   Updated: 2022/06/28 12:07:12 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_vars {
 	int		charac;
 	int		sortie;
 	int		collect;
+	int		column;
 }				t_vars;
 
 void	ft_check_mcontent(t_vars *elem, size_t column);
