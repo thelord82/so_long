@@ -6,7 +6,7 @@
 #    By: malord <malord@student.42quebec.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/20 10:07:57 by malord            #+#    #+#              #
-#    Updated: 2022/06/27 13:15:30 by malord           ###   ########.fr        #
+#    Updated: 2022/06/29 09:47:21 by malord           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,9 @@ CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra
 RM			=	rm -f
 
-SRCS		=	so_long.c	\
-				error_funcs.c
+SRCS		=	so_long.c		\
+				error_funcs.c	\
+				moves_funcs.c
 
 OBJS		= 	${SRCS:.c=.o}
 

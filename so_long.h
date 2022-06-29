@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 13:45:49 by malord            #+#    #+#             */
-/*   Updated: 2022/06/28 12:07:12 by malord           ###   ########.fr       */
+/*   Updated: 2022/06/29 11:21:02 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_vars {
 	int		sortie;
 	int		collect;
 	int		column;
+	int		avail;
 }				t_vars;
 
 void	ft_check_mcontent(t_vars *elem, size_t column);
@@ -39,4 +40,9 @@ void	ft_check_map(t_vars *elem, size_t column);
 void	ft_check_rectangle(t_vars *elem, size_t column);
 void	ft_check_wall(t_vars *elem, size_t column);
 int		ft_check_args(char *argu, int argc);
+void	go_right(t_vars *elem);
+void	go_left(t_vars *elem);
+void	go_up(t_vars *elem);
+void	go_down(t_vars *elem);
+void	ft_exit(t_vars *elem);
 #endif

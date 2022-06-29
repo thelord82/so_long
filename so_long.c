@@ -6,12 +6,31 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 07:58:23 by malord            #+#    #+#             */
-/*   Updated: 2022/06/28 14:44:36 by malord           ###   ########.fr       */
+/*   Updated: 2022/06/29 11:28:37 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "so_long.h"
+
+void	ft_put_image(int i, int j, t_vars *elem)
+{
+	if (elem->map[i][j] == '1')
+		mlx_put_image_to_window(elem->mlx, elem->win, elem->wall, elem->x,
+			elem->y);
+	if (elem->map[i][j] == '0')
+		mlx_put_image_to_window(elem->mlx, elem->win, elem->floor, elem->x,
+			elem->y);
+	if (elem->map[i][j] == 'P')
+		mlx_put_image_to_window(elem->mlx, elem->win, elem->perso, elem->x,
+			elem->y);
+	if (elem->map[i][j] == 'C')
+		mlx_put_image_to_window(elem->mlx, elem->win, elem->collectible,
+			elem->x, elem->y);
+	if (elem->map[i][j] == 'E')
+		mlx_put_image_to_window(elem->mlx, elem->win, elem->exit, elem->x,
+			elem->y);
+}
 
 void	ft_create_window(t_vars *elem)
 {
@@ -26,135 +45,11 @@ void	ft_create_window(t_vars *elem)
 		elem->x = 0;
 		while (elem->map[i][j] != '\n')
 		{
-			if (elem->map[i][j] == '1')
-				mlx_put_image_to_window(elem->mlx, elem->win, elem->wall, elem->x, elem->y);
-			if (elem->map[i][j] == '0')
-				mlx_put_image_to_window(elem->mlx, elem->win, elem->floor, elem->x, elem->y);
-			if (elem->map[i][j] == 'P')
-				mlx_put_image_to_window(elem->mlx, elem->win, elem->perso, elem->x, elem->y);
-			if (elem->map[i][j] == 'C')
-				mlx_put_image_to_window(elem->mlx, elem->win, elem->collectible, elem->x, elem->y);
-			if (elem->map[i][j] == 'E')
-				mlx_put_image_to_window(elem->mlx, elem->win, elem->exit, elem->x, elem->y);
+			ft_put_image(i, j, elem);
 			j++;
 			elem->x += 64;
 		}
 		elem->y += 64;
-		i++;
-	}
-}
-
-void	go_right(t_vars *elem)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < elem->column)
-	{
-		j = 0;
-		while (elem->map[i][j] != '\n')
-		{
-			if (elem->map[i][j] == 'P' && elem->map[i][j + 1] != '1')
-			{
-				elem->map[i][j] = '0';
-				if (elem->map[i][j + 1] == 'C')
-					elem->collect--;
-				elem->map[i][j + 1] = 'P';
-				printf("%d MOVES\n", ++elem->moves);
-				
-				printf("Balles : %d\n", elem->collect);
-				break ;
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
-void	go_left(t_vars *elem)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < elem->column)
-	{
-		j = 0;
-		while (elem->map[i][j] != '\n')
-		{
-			
-			if (elem->map[i][j] == 'P' && elem->map[i][j - 1] != '1')
-			{
-				elem->map[i][j] = '0';
-				if (elem->map[i][j - 1] == 'C')
-					elem->collect--;
-				elem->map[i][j - 1] = 'P';
-				printf("%d MOVES\n", ++elem->moves);
-				printf("Balles : %d\n", elem->collect);
-				break ;
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
-void	go_up(t_vars *elem)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < elem->column)
-	{
-		j = 0;
-		while (elem->map[i][j] != '\n' )
-		{
-			if (elem->map[i][j] == 'P' && elem->map[i - 1][j] != '1')
-			{
-				elem->map[i][j] = '0';
-				if (elem->map[i - 1][j] == 'C')
-					elem->collect--;
-				elem->map[i - 1][j] = 'P';
-				printf("%d MOVES\n", ++elem->moves);
-				printf("Balles : %d\n", elem->collect);
-				break ;
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
-void	go_down(t_vars *elem)
-{
-	int	i;
-	int	j;
-	int	result;
-
-	i = 0;
-	result = 0;
-	while (i < elem->column)
-	{
-		j = 0;
-		while (elem->map[i][j] != '\n')
-		{
-			if (elem->map[i][j] == 'P' && elem->map[i + 1][j] != '1')
-			{
-				elem->map[i][j] = '0';
-				if (elem->map[i + 1][j] == 'C')
-					elem->collect--;
-				elem->map[i + 1][j] = 'P';
-				result = 1;
-				printf("%d MOVES\n", ++elem->moves);
-				printf("Balles : %d\n", elem->collect);
-				break ;
-			}
-			j++;
-		}
-		if (result == 1)
-			break ;
 		i++;
 	}
 }
@@ -216,6 +111,7 @@ int	main(int argc, char **argv)
 	vars.y = 0;
 	if (ft_check_args(argv[1], argc) == 1)
 	{
+		vars.avail = 0;
 		fd = open(argv[1], O_RDONLY);
 		if (!fd)
 			return (0);
