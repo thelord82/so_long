@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 13:45:49 by malord            #+#    #+#             */
-/*   Updated: 2022/06/29 11:21:02 by malord           ###   ########.fr       */
+/*   Updated: 2022/07/04 14:07:02 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_vars {
 	void	*perso;
 	void	*wall;
 	void	*collectible;
+	void	*enemy;
 	void	*exit;
 	int		moves;
 	int		x;
@@ -45,4 +46,13 @@ void	go_left(t_vars *elem);
 void	go_up(t_vars *elem);
 void	go_down(t_vars *elem);
 void	ft_exit(t_vars *elem);
+void	move_p_right(t_vars *elem, int i, int j);
+void	move_p_left(t_vars *elem, int i, int j);
+void	move_p_up(t_vars *elem, int i, int j);
+void	move_p_down(t_vars *elem, int i, int j);
+void	move_e_left(t_vars *elem);
+void	move_e_right(t_vars *elem);
+void	move_e_down(t_vars *elem);
+void	move_e_up(t_vars *elem);
+void	game_win(void);
 #endif

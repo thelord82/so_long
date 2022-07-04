@@ -6,12 +6,23 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 07:58:23 by malord            #+#    #+#             */
-/*   Updated: 2022/06/29 11:28:37 by malord           ###   ########.fr       */
+/*   Updated: 2022/07/04 14:01:28 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "so_long.h"
+
+char	*nb_moves(t_vars *elem)
+{
+	char	*nb_moves;
+	char	*moves;
+
+	nb_moves = ft_itoa(elem->moves);
+	moves = ft_strjoin("MOVES : ", nb_moves);
+	free(nb_moves);
+	return (moves);
+}
 
 void	ft_put_image(int i, int j, t_vars *elem)
 {
@@ -30,15 +41,20 @@ void	ft_put_image(int i, int j, t_vars *elem)
 	if (elem->map[i][j] == 'E')
 		mlx_put_image_to_window(elem->mlx, elem->win, elem->exit, elem->x,
 			elem->y);
+	if (elem->map[i][j] == 'X')
+		mlx_put_image_to_window(elem->mlx, elem->win, elem->enemy, elem->x,
+			elem->y);
 }
 
 void	ft_create_window(t_vars *elem)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	*moves;
 
 	i = 0;
 	elem->y = 0;
+	moves = nb_moves(elem);
 	while (i < elem->column)
 	{
 		j = 0;
@@ -46,12 +62,14 @@ void	ft_create_window(t_vars *elem)
 		while (elem->map[i][j] != '\n')
 		{
 			ft_put_image(i, j, elem);
+			mlx_string_put(elem->mlx, elem->win, 20, 20, 0xffffff, moves);
 			j++;
 			elem->x += 64;
 		}
 		elem->y += 64;
 		i++;
 	}
+	free(moves);
 }
 
 int	ft_keys(int keycode, t_vars *vars)
@@ -64,28 +82,32 @@ int	ft_keys(int keycode, t_vars *vars)
 	else if( keycode == 2)
 	{
 		go_right(vars);
+		move_e_left(vars);
 		ft_create_window(vars);
 	}
 	else if (keycode == 0)
 	{
 		go_left(vars);
+		move_e_right(vars);
 		ft_create_window(vars);
 	}
 	else if (keycode == 1)
 	{
 		go_down(vars);
+		move_e_up(vars);
 		ft_create_window(vars);
 	}
 	else if (keycode == 13)
 	{
 		go_up(vars);
+		move_e_down(vars);
 		ft_create_window(vars);
 	}
 	return (0);
 }
 
 // Ferme la fenetre et quitte proprement sur la croix rouge
-int	ft_closewin()
+int	ft_closewin(void)
 {
 	exit(0);
 }
@@ -101,6 +123,7 @@ int	main(int argc, char **argv)
 	char	*wall_path = "/Users/malord/42/so_long/wall.xpm";
 	char 	*coll_path = "/Users/malord/42/so_long/collectible.xpm";
 	char	*exit_path = "/Users/malord/42/so_long/exitflag.xpm";
+	char	*enemy_path = "/Users/malord/42/so_long/enemy.xpm";
 	int		img_width;
 	int		img_height;
 
@@ -120,6 +143,7 @@ int	main(int argc, char **argv)
 		vars.perso = mlx_xpm_file_to_image(vars.mlx, perso_path, &img_width, &img_height);
 		vars.wall = mlx_xpm_file_to_image(vars.mlx, wall_path, &img_width, &img_height);
 		vars.collectible = mlx_xpm_file_to_image(vars.mlx, coll_path, &img_width, &img_height);
+		vars.enemy = mlx_xpm_file_to_image(vars.mlx, enemy_path, &img_width, &img_height);
 		vars.exit = mlx_xpm_file_to_image(vars.mlx, exit_path, &img_width, &img_height);
 		vars.map = ft_calloc(sizeof(t_vars), 1);
 		while (1)

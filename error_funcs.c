@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:38 by malord            #+#    #+#             */
-/*   Updated: 2022/06/28 07:48:43 by malord           ###   ########.fr       */
+/*   Updated: 2022/06/30 11:28:05 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	ft_check_map(t_vars *elem, size_t column)
 		{
 			if (elem->map[i][j] != '0' && elem->map[i][j] != '1'
 				&& elem->map[i][j] != 'E' && elem->map[i][j] != 'C'
-				&& elem->map[i][j] != 'P' && elem->map[i][j] != '\n')
+				&& elem->map[i][j] != 'P' && elem->map[i][j] != 'X'
+				&& elem->map[i][j] != '\n')
 			{
 				printf("Error\nMap has invalid characters.");
 				exit(0);

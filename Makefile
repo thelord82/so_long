@@ -6,7 +6,7 @@
 #    By: malord <malord@student.42quebec.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/20 10:07:57 by malord            #+#    #+#              #
-#    Updated: 2022/06/29 09:47:21 by malord           ###   ########.fr        #
+#    Updated: 2022/07/04 14:31:40 by malord           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,9 @@ RM			=	rm -f
 
 SRCS		=	so_long.c		\
 				error_funcs.c	\
-				moves_funcs.c
+				moves_funcs.c	\
+				moves_funcs2.c	\
+				enemy_moves.c
 
 OBJS		= 	${SRCS:.c=.o}
 
