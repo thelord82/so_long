@@ -6,14 +6,14 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 13:45:49 by malord            #+#    #+#             */
-/*   Updated: 2022/07/04 14:07:02 by malord           ###   ########.fr       */
+/*   Updated: 2022/07/04 20:57:46 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # include <unistd.h>
-# include "mlx.h"
+# include "mlx/mlx.h"
 # include <stdio.h>
 
 typedef struct s_vars {
@@ -55,4 +55,7 @@ void	move_e_right(t_vars *elem);
 void	move_e_down(t_vars *elem);
 void	move_e_up(t_vars *elem);
 void	game_win(void);
+void	game_controls(int keycode, t_vars *vars);
+void	esc_key(int keycode, t_vars *vars);
+void	ft_create_window(t_vars *elem);
 #endif

@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 07:58:23 by malord            #+#    #+#             */
-/*   Updated: 2022/07/04 14:01:28 by malord           ###   ########.fr       */
+/*   Updated: 2022/07/04 20:10:40 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,35 +74,8 @@ void	ft_create_window(t_vars *elem)
 
 int	ft_keys(int keycode, t_vars *vars)
 {	
-	if (keycode == 53)
-	{
-		mlx_destroy_window(vars->mlx, vars->win);
-		exit(0);
-	}
-	else if( keycode == 2)
-	{
-		go_right(vars);
-		move_e_left(vars);
-		ft_create_window(vars);
-	}
-	else if (keycode == 0)
-	{
-		go_left(vars);
-		move_e_right(vars);
-		ft_create_window(vars);
-	}
-	else if (keycode == 1)
-	{
-		go_down(vars);
-		move_e_up(vars);
-		ft_create_window(vars);
-	}
-	else if (keycode == 13)
-	{
-		go_up(vars);
-		move_e_down(vars);
-		ft_create_window(vars);
-	}
+	esc_key(keycode, vars);
+	game_controls(keycode, vars);
 	return (0);
 }
 
@@ -117,7 +90,6 @@ int	main(int argc, char **argv)
 	t_vars	vars;
 	int		fd;
 	int		j;
-	size_t	column;
 	char	*floor_path = "/Users/malord/42/so_long/floorgreen.xpm";
 	char	*perso_path = "/Users/malord/42/so_long/mario2.xpm";
 	char	*wall_path = "/Users/malord/42/so_long/wall.xpm";
@@ -127,7 +99,6 @@ int	main(int argc, char **argv)
 	int		img_width;
 	int		img_height;
 
-	column = 0;
 	j = 0;
 	vars.moves = 0;
 	vars.x = 0; 
@@ -157,7 +128,6 @@ int	main(int argc, char **argv)
 			j++;
 		}
 		vars.column = j;
-		j = 0;
 		ft_check_wall(&vars, vars.column);
 		ft_check_rectangle(&vars, vars.column);
 		ft_check_map(&vars, vars.column);
