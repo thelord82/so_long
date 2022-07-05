@@ -6,14 +6,14 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 14:30:41 by malord            #+#    #+#             */
-/*   Updated: 2022/07/04 14:35:28 by malord           ###   ########.fr       */
+/*   Updated: 2022/07/05 14:31:54 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "so_long.h"
 
-void	move_e_left(t_vars *elem)
+void	ft_move_e_left(t_vars *elem)
 {
 	int	i;
 	int	j;
@@ -28,6 +28,8 @@ void	move_e_left(t_vars *elem)
 			elem->map[i][j - 1] != 'E' && elem->map[i][j - 1] != 'C' &&
 			elem->map[i][j - 1] != 'X')
 			{
+				if (elem->map[i][j] == 'X' && elem->map[i][j - 1] == 'P')
+					ft_game_over();
 				elem->map[i][j] = '0';
 				elem->map[i][j - 1] = 'X';
 				break ;
@@ -38,7 +40,7 @@ void	move_e_left(t_vars *elem)
 	}
 }
 
-void	move_e_right(t_vars *elem)
+void	ft_move_e_right(t_vars *elem)
 {
 	int	i;
 	int	j;
@@ -53,6 +55,8 @@ void	move_e_right(t_vars *elem)
 			elem->map[i][j + 1] != 'E' && elem->map[i][j + 1] != 'C' &&
 			elem->map[i][j + 1] != 'X')
 			{
+				if (elem->map[i][j] == 'X' && elem->map[i][j + 1] == 'P')
+					ft_game_over();
 				elem->map[i][j] = '0';
 				elem->map[i][j + 1] = 'X';
 				break ;
@@ -63,36 +67,36 @@ void	move_e_right(t_vars *elem)
 	}
 }
 
-void	move_e_down(t_vars *elem)
+void	ft_move_e_down(t_vars *elem)
 {
 	int	i;
 	int	j;
 	int	result;
 
 	result = 0;
-	i = 0;
-	while (i < elem->column - 1)
+	i = -1;
+	while (++i < elem->column - 1)
 	{
-		j = 0;
-		while (elem->map[i][j] != '\n')
+		j = -1;
+		while (elem->map[i][++j] != '\n')
 		{
 			if (elem->map[i][j] == 'X' && elem->map[i + 1][j] != '1' &&
 			elem->map[i + 1][j] != 'E' && elem->map[i + 1][j] != 'C' &&
 			elem->map[i + 1][j] != 'X')
 			{
+				if (elem->map[i][j] == 'X' && elem->map[i + 1][j] == 'P')
+					ft_game_over();
 				elem->map[i][j] = '0';
 				elem->map[i + 1][j] = 'X';
 				result = 1;
 			}
-			j++;
 		}
 		if (result == 1)
 			break ;
-		i++;
 	}
 }
 
-void	move_e_up(t_vars *elem)
+void	ft_move_e_up(t_vars *elem)
 {
 	int	i;
 	int	j;
@@ -107,6 +111,8 @@ void	move_e_up(t_vars *elem)
 			elem->map[i - 1][j] != 'E' && elem->map[i - 1][j] != 'C' &&
 			elem->map[i - 1][j] != 'X')
 			{
+				if (elem->map[i][j] == 'X' && elem->map[i - 1][j] == 'P')
+					ft_game_over();
 				elem->map[i][j] = '0';
 				elem->map[i - 1][j] = 'X';
 				break ;
@@ -115,4 +121,10 @@ void	move_e_up(t_vars *elem)
 		}
 		i++;
 	}
+}
+
+void	ft_game_over(void)
+{
+	printf("You've been hit by bad driver Lou !\n");
+	exit(0);
 }

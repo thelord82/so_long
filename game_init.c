@@ -6,73 +6,109 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:34:35 by malord            #+#    #+#             */
-/*   Updated: 2022/07/04 20:10:47 by malord           ###   ########.fr       */
+/*   Updated: 2022/07/05 14:32:02 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "so_long.h"
 
-/*void	game_init(t_vars *vars, int fd, char **argv)
+void	ft_map_to_array(t_vars *vars, int fd)
 {
-	vars->avail = 0;
-	fd = open(argv[1], O_RDONLY);
-	if (!fd)
-		return (0);
-	vars->mlx = mlx_init();
-	vars->floor = mlx_xpm_file_to_image(vars.mlx, floor_path, &img_width, &img_height);
-	vars->perso = mlx_xpm_file_to_image(vars.mlx, perso_path, &img_width, &img_height);
-	vars->wall = mlx_xpm_file_to_image(vars.mlx, wall_path, &img_width, &img_height);
-	vars->collectible = mlx_xpm_file_to_image(vars.mlx, coll_path, &img_width, &img_height);
-	vars->enemy = mlx_xpm_file_to_image(vars.mlx, enemy_path, &img_width, &img_height);
-	vars->exit = mlx_xpm_file_to_image(vars.mlx, exit_path, &img_width, &img_height);
-	vars->map = ft_calloc(sizeof(t_vars), 1);
+	vars->column = 0;
+	vars->map[vars->column] = get_next_line(fd);
+	if (vars->map[vars->column] == NULL)
+	{
+		printf("Error : File is empty.\n");
+		free (vars->map[vars->column]);
+		exit(0);
+	}
+	else
+		vars->column++;
 	while (1)
 	{
-		vars->map[j] = get_next_line(fd);
-		if (vars->map[j] == NULL)
+		vars->map[vars->column] = get_next_line(fd);
+		if (vars->map[vars->column] == NULL)
 		{
-			free (vars->map[j]);
+			free (vars->map[vars->column]);
 			break ;
 		}
-		j++;
+		vars->column++;
 	}
-	vars->column = j;
-}*/
+}
 
-void	game_controls(int keycode, t_vars *vars)
+void	ft_map_size(t_vars *vars, char *argv)
 {
-	if( keycode == 2)
+	int		fd;
+	char	*row;
+
+	fd = open(argv, O_RDONLY);
+	row = get_next_line(fd);
+	vars->rows = 1;
+	while (row != NULL)
 	{
-		go_right(vars);
-		move_e_left(vars);
+		free (row);
+		row = get_next_line(fd);
+		vars->rows++;
+	}
+	free (row);
+	close (fd);
+}
+
+void	ft_init_struct(t_vars *vars)
+{
+	int	img_width;
+	int	img_height;
+
+	vars->mlx = mlx_init();
+	vars->floor = mlx_xpm_file_to_image(vars->mlx, "img/floorgreen.xpm",
+			&img_width, &img_height);
+	vars->perso = mlx_xpm_file_to_image(vars->mlx, "img/mario2.xpm",
+			&img_width, &img_height);
+	vars->wall = mlx_xpm_file_to_image(vars->mlx, "img/wall.xpm",
+			&img_width, &img_height);
+	vars->collectible = mlx_xpm_file_to_image(vars->mlx,
+			"img/collectible.xpm", &img_width, &img_height);
+	vars->enemy = mlx_xpm_file_to_image(vars->mlx, "img/enemy.xpm",
+			&img_width, &img_height);
+	vars->exit = mlx_xpm_file_to_image(vars->mlx, "img/exitflag.xpm",
+			&img_width, &img_height);
+	vars->map = ft_calloc(sizeof(char *), vars->rows + 1);
+}
+
+void	ft_game_controls(int keycode, t_vars *vars)
+{
+	if (keycode == 2)
+	{
+		ft_go_right(vars);
+		ft_move_e_left(vars);
 		ft_create_window(vars);
 	}
 	else if (keycode == 0)
 	{
-		go_left(vars);
-		move_e_right(vars);
+		ft_go_left(vars);
+		ft_move_e_right(vars);
 		ft_create_window(vars);
 	}
 	else if (keycode == 1)
 	{
-		go_down(vars);
-		move_e_up(vars);
+		ft_go_down(vars);
+		ft_move_e_down(vars);
 		ft_create_window(vars);
 	}
 	else if (keycode == 13)
 	{
-		go_up(vars);
-		move_e_down(vars);
+		ft_go_up(vars);
+		ft_move_e_up(vars);
 		ft_create_window(vars);
 	}
 }
 
-void	esc_key(int keycode, t_vars *vars)
+void	ft_check_fd(int fd)
 {
-	if (keycode == 53)
+	if (fd == -1)
 	{
-		mlx_destroy_window(vars->mlx, vars->win);
+		printf("Error : %s\n", strerror(errno));
 		exit(0);
 	}
 }

@@ -6,7 +6,7 @@
 #    By: malord <malord@student.42quebec.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/20 10:07:57 by malord            #+#    #+#              #
-#    Updated: 2022/07/04 19:35:00 by malord           ###   ########.fr        #
+#    Updated: 2022/07/05 14:32:12 by malord           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRCS		=	so_long.c		\
 				moves_funcs.c	\
 				moves_funcs2.c	\
 				enemy_moves.c	\
-				game_init.c
+				game_init.c		\
+				close_game.c
 
 OBJS		= 	${SRCS:.c=.o}
 
