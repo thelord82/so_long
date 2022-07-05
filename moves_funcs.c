@@ -6,13 +6,14 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 09:46:15 by malord            #+#    #+#             */
-/*   Updated: 2022/07/05 14:32:15 by malord           ###   ########.fr       */
+/*   Updated: 2022/07/05 14:51:57 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "so_long.h"
 
+//Calls function that moves character right
 void	ft_go_right(t_vars *elem)
 {
 	int	i;
@@ -39,6 +40,7 @@ void	ft_go_right(t_vars *elem)
 	}
 }
 
+//Calls functions that moves character left
 void	ft_go_left(t_vars *elem)
 {
 	int	i;
@@ -65,6 +67,7 @@ void	ft_go_left(t_vars *elem)
 	}
 }
 
+//Calls functions that moves character up
 void	ft_go_up(t_vars *elem)
 {
 	int	i;
@@ -91,6 +94,7 @@ void	ft_go_up(t_vars *elem)
 	}
 }
 
+//Calls functions that moves character down
 void	ft_go_down(t_vars *elem)
 {
 	int	i;
@@ -119,6 +123,7 @@ void	ft_go_down(t_vars *elem)
 	}
 }
 
+//Changes the image of the exit, once it becomes available
 void	ft_exit(t_vars *elem)
 {
 	int	img_width;

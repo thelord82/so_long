@@ -6,13 +6,14 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 07:58:23 by malord            #+#    #+#             */
-/*   Updated: 2022/07/05 14:32:24 by malord           ###   ########.fr       */
+/*   Updated: 2022/07/05 14:53:42 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "so_long.h"
 
+//Calculates the number of moves
 char	*ft_nb_moves(t_vars *elem)
 {
 	char	*nb_moves;
@@ -24,6 +25,7 @@ char	*ft_nb_moves(t_vars *elem)
 	return (moves);
 }
 
+//Displays images to the generated window
 void	ft_put_image(int i, int j, t_vars *elem)
 {
 	if (elem->map[i][j] == '1')
@@ -46,6 +48,7 @@ void	ft_put_image(int i, int j, t_vars *elem)
 			elem->y);
 }
 
+//Creates the window necessary for the game
 void	ft_create_window(t_vars *elem)
 {
 	int		i;
@@ -72,6 +75,7 @@ void	ft_create_window(t_vars *elem)
 	free(moves);
 }
 
+//Handles key events for playing the game
 int	ft_keys(int keycode, t_vars *vars)
 {	
 	ft_esc_key(keycode, vars);

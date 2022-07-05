@@ -6,13 +6,14 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 14:30:41 by malord            #+#    #+#             */
-/*   Updated: 2022/07/05 14:31:54 by malord           ###   ########.fr       */
+/*   Updated: 2022/07/05 14:45:55 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "so_long.h"
 
+//Moves enemy left
 void	ft_move_e_left(t_vars *elem)
 {
 	int	i;
@@ -40,6 +41,7 @@ void	ft_move_e_left(t_vars *elem)
 	}
 }
 
+//Moves enemy right
 void	ft_move_e_right(t_vars *elem)
 {
 	int	i;
@@ -67,6 +69,7 @@ void	ft_move_e_right(t_vars *elem)
 	}
 }
 
+//Moves enemy down
 void	ft_move_e_down(t_vars *elem)
 {
 	int	i;
@@ -96,6 +99,7 @@ void	ft_move_e_down(t_vars *elem)
 	}
 }
 
+//Moves enemy up
 void	ft_move_e_up(t_vars *elem)
 {
 	int	i;
@@ -123,6 +127,7 @@ void	ft_move_e_up(t_vars *elem)
 	}
 }
 
+//Gets called when character is hit by an enemy
 void	ft_game_over(void)
 {
 	printf("You've been hit by bad driver Lou !\n");

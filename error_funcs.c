@@ -6,13 +6,14 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:30:38 by malord            #+#    #+#             */
-/*   Updated: 2022/07/05 14:31:58 by malord           ###   ########.fr       */
+/*   Updated: 2022/07/05 14:47:25 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "so_long.h"
 
+//Checks if the content of a map respects the minimal requirements
 void	ft_check_mcontent(t_vars *elem, size_t column)
 {
 	size_t	i;
@@ -41,6 +42,7 @@ void	ft_check_mcontent(t_vars *elem, size_t column)
 	}
 }
 
+//Checks if the map has invalid chars
 void	ft_check_map(t_vars *elem, size_t column)
 {
 	size_t	i;
@@ -66,6 +68,7 @@ void	ft_check_map(t_vars *elem, size_t column)
 	}
 }
 
+//Checks if the map is rectangle shaped
 void	ft_check_rectangle(t_vars *elem, size_t column)
 {
 	size_t	i;
@@ -90,6 +93,7 @@ void	ft_check_rectangle(t_vars *elem, size_t column)
 	}
 }
 
+//Checks if there is one and only one argument to execute the program
 int	ft_check_args(char *argu, int argc)
 {
 	size_t	ext;

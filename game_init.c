@@ -6,13 +6,14 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:34:35 by malord            #+#    #+#             */
-/*   Updated: 2022/07/05 14:32:02 by malord           ###   ########.fr       */
+/*   Updated: 2022/07/05 14:49:37 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "so_long.h"
 
+//Takes a file with fd and puts it into an array
 void	ft_map_to_array(t_vars *vars, int fd)
 {
 	vars->column = 0;
@@ -37,6 +38,7 @@ void	ft_map_to_array(t_vars *vars, int fd)
 	}
 }
 
+//Gets the number of rows for the fd, allows to malloc correctly
 void	ft_map_size(t_vars *vars, char *argv)
 {
 	int		fd;
@@ -55,6 +57,7 @@ void	ft_map_size(t_vars *vars, char *argv)
 	close (fd);
 }
 
+//Initialize the struct by converting image files and memory allocation for map
 void	ft_init_struct(t_vars *vars)
 {
 	int	img_width;
@@ -76,6 +79,7 @@ void	ft_init_struct(t_vars *vars)
 	vars->map = ft_calloc(sizeof(char *), vars->rows + 1);
 }
 
+//Calls movement functions on certain key events
 void	ft_game_controls(int keycode, t_vars *vars)
 {
 	if (keycode == 2)
@@ -104,6 +108,7 @@ void	ft_game_controls(int keycode, t_vars *vars)
 	}
 }
 
+//Checks if the file passed in argument exists
 void	ft_check_fd(int fd)
 {
 	if (fd == -1)
