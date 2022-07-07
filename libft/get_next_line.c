@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 09:03:48 by malord            #+#    #+#             */
-/*   Updated: 2022/06/13 13:38:40 by malord           ###   ########.fr       */
+/*   Updated: 2022/07/07 08:23:09 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ static long	ft_getline(char **cleanbuf, int fd)
 		buf = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 		reader = read(fd, buf, BUFFER_SIZE);
 		if (reader <= 0)
-			return ((int)ft_free(buf));
+		{
+			ft_free(buf);
+			return (0);
+		}
 		*cleanbuf = ft_strjoin_free(*cleanbuf, buf);
 		free(buf);
 	}
